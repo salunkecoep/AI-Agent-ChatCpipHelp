@@ -1,0 +1,59 @@
+﻿Topic,Information
+Quality Management,"The Quality Management workspace is a workspace dedicated to working with Teamcenter Quality
+applications. The tile in the Quality Applications section in the Quality Management workspace lets
+you work with your application."
+Naming conventions,"Naming conventions are used to organize the Quality Characteristics and Characteristic Groups that are
+generated when you import product and manufacturing information (PMI) from a part. The naming
+pattern in the naming convention is based on the attributes of the Quality Characteristics. These Quality
+Characteristics are generated and added to a Characteristic Group, whose Characteristic Type and name
+you define in the naming convention in the Quality Master Data library. The name of the Characteristic
+Group is a combination of the attributes and the delimiter defined in the naming convention."
+Edit a naming convention,"After creating a naming convention, you can edit it to add, rearrange, or remove attributes; change
+the delimiter; or update its name and description. After you edit and save the naming convention, the
+updates are reflected in all Quality Characteristics that are created with this naming convention.
+1. On the HOME page, click the QUALITY MASTER DATA tile.
+2. In the Quality Master Data location, click the Characteristics Library page.
+3. In the left pane, click Characteristics and Rule Engine in the Work area toolbar.
+4. In the Characteristics and Rule Engine panel, click Naming Convention."
+Delete a naming convention,"You can delete a naming convention only if it is not used in a rule or assigned as a default naming
+convention.
+1. On the HOME page, click the QUALITY MASTER DATA tile.
+2. In the Quality Master Data location, click the Characteristics Library page."
+Create a naming rule to process the imported PMI,"Naming rules process the product and manufacturing information (PMI) from a part’s 3D/2D data to
+create Quality Characteristics based on naming conventions. In the naming rule, you can create multiple
+conditions based on the attributes of PMI. You must also define a default naming convention for creating
+Quality Characteristics. The default naming convention is used when any of the naming rule conditions
+are not met. By default, you can use the available attributes of PMIs from BCT Inspector to create
+conditions in the naming rule. If required, you can configure Control Plan to display more BCT Inspector
+attributes through Business Modeler Integrated Development Environment (BMIDE).
+By default, an active naming rule is available after installing Control Plan. This naming rule has a default
+naming convention for creating Variable Quality Characteristics, and no conditions are defined for the
+rule."
+Edit a naming rule,"rearrange, or remove attributes and conditions in the RULE BUILDER section.
+1. On the HOME page, click the QUALITY MASTER DATA tile.
+2. In the Quality Master Data location, click the Characteristics Library page.
+3. In the left pane, click Characteristics and Rule Engine in the Work area toolbar.
+4. In the Characteristics and Rule Engine panel, click Rule.
+4. Setting up naming conventions and rules
+4-"
+Activate a naming rule,"After creating a naming rule, you must activate it for the naming rule to be used to process the imported
+PMI. You can have only one active rule at a time. When you activate a new rule, the existing rule is
+deactivated.
+1. On the HOME page, click the QUALITY MASTER DATA tile.
+2. In the Quality Master Data location, click the Characteristics Library page.
+3. In the left pane, click Characteristics and Rule Engine in the Work area toolbar.
+4. In the Characteristics and Rule Engine panel, click Rule."
+Delete a naming rule,"You can delete a naming rule only if it is inactive.
+1. On the HOME page, click the QUALITY MASTER DATA tile.
+2. In the Quality Master Data location, click the Characteristics Library page.
+3. In the left pane, click Characteristics and Rule Engine in the Work area toolbar.
+4. Setting up naming conventions and rules
+4-14"
+Quality Characteristics,"Quality Characteristics are the attributes of a Part or Process that must be monitored during
+manufacturing to deliver a high-quality product. You can create the following types of Quality
+Characteristics:
+• Variable: Defines the specific values to be measured, including the nominal values, its tolerance
+values, and the unit of measure.
+• Attributive: Defines which attributes are acceptable in the OK Condition field and the ones that are
+unacceptable in the Not OK Condition field.
+• Visual: Specifies the images of the defects that can occur or standard specification images."

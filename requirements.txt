@@ -1,9 +1,16 @@
-langchain 
-wikipedia 
-langchain-community 
-langchain-openai
-langchain-anthropic
-python-dotenv
-pydantic
-duckduckgo-search
+langchain
+langchain-ollama
+langchain-chroma
+pandas
+sentence-transformers
+PyPDF2
+transformers
+scipy
+ftfy
+accelerate
+flask_ngrok
+Flask
+
+
+
 

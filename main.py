@@ -1,57 +1,34 @@
-from dotenv import load_dotenv
-from pydantic import BaseModel
-from langchain_openai import ChatOpenAI
-from langchain_anthropic import ChatAnthropic
+from langchain_ollama.llms import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import PydanticOutputParser
-from langchain.agents import create_tool_calling_agent, AgentExecutor
-from tools import search_tool, wiki_tool, save_tool
+from vector_store import retriever
+from flask import Flask, render_template, request
 
-load_dotenv()
+model = OllamaLLM(model="llama3.2")
 
-class ResearchResponse(BaseModel):
-    topic: str
-    summary: str
-    sources: list[str]
-    tools_used: list[str]
+template = """
+You are an exeprt in answering questions about a Control Plan and Inspection Plan Module which is in Teamcenter.
+Here are information about Control Plan and Inspection Plan Module: {data}
+Here is the question to answer: {question}
+"""
+prompt = ChatPromptTemplate.from_template(template)
+chain = prompt | model
+
+# Start flask app and set to ngrok
+app = Flask(__name__)
+
+@app.route('/')
+def initial():
+  return render_template('index.html', input="", response="")
+
+@app.route('/submit-prompt', methods=['POST'])
+def generate_response():
+  prompt = request.form['prompt-input']
+  result = ""
+  if prompt.strip(): 
+    data = retriever.invoke(prompt)
+    result = chain.invoke({"data": data, "question": prompt})
+    return render_template('index.html', input=prompt, response=result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
     
-
-llm = ChatAnthropic(model="claude-3-5-sonnet-20241022")
-parser = PydanticOutputParser(pydantic_object=ResearchResponse)
-
-prompt = ChatPromptTemplate.from_messages(
-    [
-        (
-            "system",
-            """
-            You are a research assistant that will help generate a research paper.
-            Answer the user query and use neccessary tools. 
-            Wrap the output in this format and provide no other text\n{format_instructions}
-            """,
-        ),
-        ("placeholder", "{chat_history}"),
-        ("human", "{query}"),
-        ("placeholder", "{agent_scratchpad}"),
-    ]
-).partial(format_instructions=parser.get_format_instructions())
-
-tools = [search_tool, wiki_tool, save_tool]
-agent = create_tool_calling_agent(
-    llm=llm,
-    prompt=prompt,
-    tools=tools
-)
-
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
-query = input("What can i help you research? ")
-raw_response = agent_executor.invoke({"query": query})
-
-try:
-    structured_response = parser.parse(raw_response.get("output")[0]["text"])
-    print(structured_response)
-except Exception as e:
-    print("Error parsing response", e, "Raw Response - ", raw_response)
-
-
-
-
