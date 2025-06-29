@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control and Inspection Plan</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: normal;
+            margin-bottom: 30px;
+        }
+
+        .input-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .response-box {
+            font-size: 21px;
+            margin: 50px;
+            padding-top: 100px;
+            text-align: left;
+            /* Align text to the left */
+            word-wrap: break-word;
+            /* Force long words to wrap */
+            white-space: normal;
+            /* Allow normal text wrapping */
+            overflow-x: hidden;
+            /* Prevent horizontal scrollbar */
+        }
+
+        textarea {
+            width: 750px;
+            height: 100px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 35px;
+            font-size: 18px;
+            resize: none;
+            /* disables resizing to keep design clean */
+            outline: none;
+        }
+
+        .send-button {
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .send-button:hover {
+            background-color: #333;
+        }
+
+        .chat-bubble {
+            display: inline-block;
+            background-color: #f0f0f0;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form action="\submit-prompt" method="post" id="submission-form">
+            <div class="response-box">
+                <div class="chat-bubble">
+                    <label style="font-size: 21px;">
+                        {{ input.replace('\n', '<br>') | safe }}
+                    </label>
+                </div>
+                <br><br>
+                <label>{{ response.replace('\n', '<br>') | safe }}</label>
+            </div>
+            <h1>What is your question?</h1>
+            <div class="input-box">
+                <textarea id="prompt" name="prompt-input" placeholder="Ask anything"></textarea>
+                <button class="send-button" type="submit">&#8593;</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("prompt").addEventListener("keydown", function (event) {
+            if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault(); // Prevent adding a new line
+                document.getElementById("submission-form").submit(); // Submit the form
+            }
+        });
+    </script>
+</body>
+
+</html>
